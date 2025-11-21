@@ -4,12 +4,12 @@
 # 2025-11-20
 
 from music21 import stream, expressions, metadata, pitch
-from music21 import interval, chord, meter
+from music21 import interval, chord, meter, tempo, note, dynamics
 import itertools
 
 # Define the intervals to be used
-interval_pool = [3, 4, 5, 6, 7]
-set_size = 4
+interval_pool = [3, 4, 10, 11]
+set_size = 3
 
 # Enumerate all permutations with repetition and store them in a list
 perms = list(itertools.product(interval_pool, repeat=set_size))
@@ -20,7 +20,10 @@ piano = stream.PartStaff()
 piano.partName = "Piano"
 te = expressions.TextExpression(num_chords + " chords")
 piano.insert(0, te)
+piano.insert(0, dynamics.Dynamic("p"))
 score = stream.Score()
+mm = tempo.MetronomeMark("", 120, note.Note(type="quarter"))
+piano.insert(0, mm)
 score.metadata = metadata.Metadata()
 score.metadata.composer = "Chester Jankowski"
 score.metadata.title = (
@@ -33,7 +36,7 @@ score.metadata.title = (
 # Iterate through the perms and create chords
 start_pitch = pitch.Pitch("C4")
 for perm in perms:
-    interval_label = "".join(map(str, perm))
+    interval_label = "<" + "-".join(map(str, perm)) + ">"
     current_pitch = start_pitch
     chord_pitches = [start_pitch]
     for i in perm:
