@@ -6,6 +6,7 @@
 from music21 import stream, expressions, metadata, pitch
 from music21 import interval, chord, meter, tempo, note, dynamics
 import itertools
+from cjcomp import int_label
 
 # Define the intervals to be used
 interval_pool = [3, 4, 10, 11]
@@ -36,18 +37,16 @@ score.metadata.title = (
 # Iterate through the perms and create chords
 start_pitch = pitch.Pitch("C4")
 for perm in perms:
-    interval_label = "<" + "-".join(map(str, perm)) + ">"
     current_pitch = start_pitch
     chord_pitches = [start_pitch]
     for i in perm:
         current_pitch = interval.Interval(i).transposePitch(current_pitch)
         chord_pitches.append(current_pitch)
     my_chord = chord.Chord(chord_pitches)
+    l = int_label(my_chord)
     my_chord.quarterLength = 2
-    my_chord.addLyric(interval_label)
+    my_chord.addLyric(l)
     my_chord.addLyric(str(my_chord.forteClassTn))
-    # print(interval_label)
-    # my_chord.show('text')
     piano.append(my_chord)
 
 # Create and show the score
