@@ -1,3 +1,6 @@
+# ---------------------------------------------------------------------
+# Print all music21 environment variables
+# ---------------------------------------------------------------------
 from music21 import environment
 
 # Create a UserSettings object

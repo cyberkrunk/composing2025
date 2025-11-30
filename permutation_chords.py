@@ -1,7 +1,9 @@
+# ---------------------------------------------------------------------
 # Enumerate the permutations with repetition of a given set of
 # intervals, then create chords for each perm, while labeling each
 # chord with its set name in the lyrics line.
 # 2025-11-20
+# ---------------------------------------------------------------------
 
 from music21 import stream, expressions, metadata, pitch
 from music21 import interval, chord, meter, tempo, note, dynamics

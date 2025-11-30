@@ -1,6 +1,8 @@
+# ---------------------------------------------------------------------
 # This is sample code to read in the fibonacci.json file and load it
 # into a python dictionary.
 # 2025-09-22
+# ---------------------------------------------------------------------
 
 import json
 

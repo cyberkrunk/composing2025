@@ -1,6 +1,8 @@
+# ---------------------------------------------------------------------
 # This is python code to generate all strong compositions of the
 # integers 1-12. Printing is formatted to be used in a .md file.
 # 2025-09-22
+# ---------------------------------------------------------------------
 
 import scipy as sp
 

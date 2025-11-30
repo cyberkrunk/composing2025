@@ -1,9 +1,11 @@
+# ---------------------------------------------------------------------
 # Python code to generate ascending integer compositions, which are
 # compositions in which all the summands are arranged in ascending
 # order. There is only one such composition per cardinality, thus
 # they are equivalent to integer partitions. This code adapted from
 # Jerome Kelleher.
 # 2025-09-24
+# ---------------------------------------------------------------------
 
 
 def accel_asc(n):

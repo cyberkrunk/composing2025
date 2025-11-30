@@ -1,3 +1,6 @@
+# ---------------------------------------------------------------------
+# Hello world in music21
+# ---------------------------------------------------------------------
 from music21 import *
 
 # environment.set("musicxmlPath", "C:\\Program Files\\MuseScore 3\\bin\\MuseScore3.exe")

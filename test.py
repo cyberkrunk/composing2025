@@ -1,7 +1,9 @@
-from music21 import note, chord, interval, stream
-from cjcomp import setup_score
+from music21 import *
+from cjcomp import int_label, int_sia
 
-my_score = setup_score("Holy fucking shitballs", "Guitar")
-part = my_score.parts[0]
-part.append(note.Note("C5"))
-my_score.show()
+
+n = note.Note(11)
+print(n)
+
+c = chord.Chord([0, 8, 11])
+print(c)

@@ -1,3 +1,4 @@
+# ---------------------------------------------------------------------
 # This is python code to calculate the first 40 Fibonacci numbers in a
 # python dictionary, then write that dictionary to a json file for use
 # in other programs. 40 was chosen because it is the next greater
@@ -5,6 +6,7 @@
 # and I can't think of why I need a Fibonacci number greater than that
 # for composing.
 # 2025-09-22
+# ---------------------------------------------------------------------
 
 import json
 
