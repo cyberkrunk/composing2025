@@ -1,12 +1,12 @@
 # ---------------------------------------------------------------------
-# Enumerate all subsets from the most common scales
+# Enumerate all subsets from the most common scale_types
 # ---------------------------------------------------------------------
 
 from music21 import *
 from itertools import combinations, permutations
 from collections import Counter
 from natsort import natsorted
-from cjcomp import int_sia
+from cjcomp import int_sia, plt_circle
 import sys
 
 pentatonic = ["pentatonic", (0, 3, 5, 7, 10)]
@@ -17,32 +17,36 @@ acoustic = ["acoustic", (0, 1, 3, 4, 6, 8, 10)]
 diatonic = ["diatonic", (0, 1, 3, 5, 6, 8, 10)]
 octatonic = ["octatonic", (0, 1, 3, 4, 6, 7, 9, 10)]
 
-scale = hexatonic
-size = len(scale[1])
+scale_type = hexatonic
+size = len(scale_type[1])
 
 stdout_fileno = sys.stdout
-sys.stdout = open("./output/" + str(scale[0]) + "-pc-subsets.md", "w")
+sys.stdout = open("./output/" + str(scale_type[0]) + "-pc-subsets.md", "w")
 
-print(f"## Subsets of {scale[0]}, {scale[1]}")
+print(f"## Subsets of {scale_type[0]}, {scale_type[1]}")
 print()
 print("| pcs | Forte name | prime | sia | ic Vector | Common |")
 print("| --- | --- | --- | --- | --- | --- |")
 print(
     "| ",
-    chord.Chord(scale[1]).orderedPitchClassesString,
+    chord.Chord(scale_type[1]).orderedPitchClassesString,
     " | ",
-    chord.Chord(scale[1]).forteClass,
+    chord.Chord(scale_type[1]).forteClass,
     " | ",
-    chord.Chord(scale[1]).primeFormString,
+    chord.Chord(scale_type[1]).primeFormString,
     " | ",
-    int_sia(chord.Chord(scale[1])),
+    int_sia(chord.Chord(scale_type[1])),
     " | ",
-    chord.Chord(scale[1]).intervalVectorString,
+    chord.Chord(scale_type[1]).intervalVectorString,
     " | ",
-    chord.Chord(scale[1]).commonName,
+    chord.Chord(scale_type[1]).commonName,
     " |",
 )
 print()
+
+plt_circle(chord.Chord(scale_type[1]), scale_type[0])
+
+print(f"![](./{scale_type[0]}.png)")
 
 for k in range(3, size):
     cnt = Counter()
@@ -50,7 +54,7 @@ for k in range(3, size):
     print()
     print("| pcs | Forte name | prime | sia | ic Vector | Common |")
     print("| --- | --- | --- | --- | --- | --- |")
-    for i in combinations(scale[1], k):
+    for i in combinations(scale_type[1], k):
         print(
             "| ",
             chord.Chord(i).orderedPitchClassesString,
@@ -71,7 +75,7 @@ for k in range(3, size):
     summary = dict(natsorted(items))
     pretty = ", ".join(f"{k}: {v}" for k, v in summary.items())
     print()
-    print(f"Forte summary: {pretty}.")
+    print(f"Summary: {pretty}.")
     print()
 
 # Close the file

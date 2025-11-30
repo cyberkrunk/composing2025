@@ -1,9 +1,10 @@
 from music21 import *
-from cjcomp import int_label, int_sia
+from cjcomp import int_label, int_sia, plt_circle
 
 
-n = note.Note(11)
-print(n)
+
 
 c = chord.Chord([0, 8, 11])
 print(c)
+
+plt_circle(c)

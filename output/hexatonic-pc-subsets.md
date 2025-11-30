@@ -4,6 +4,7 @@
 | --- | --- | --- | --- | --- | --- |
 |  <03478B>  |  6-20  |  <014589>  |  <3-1-3-1-3-1>  |  <303630>  |  E all combinatorial (P2, P6, P10, I3, I7, R4, R8, RI1, RI5, RI9)  |
 
+![](./hexatonic.png)
 ## Subsets of cardinality 3
 
 | pcs | Forte name | prime | sia | ic Vector | Common |
