@@ -15,12 +15,10 @@ def int_label(my_chord):
     :param my_chord: chord
     """
     chord_size = len(my_chord.pitches)
-    for p in my_chord.pitches:
-        p.simplifyEnharmonic(inPlace=True, mostCommon=True)
-        p.octave = 4
+    pcs = [p.pitchClass for p in my_chord.pitches]
     interval_list = []
     for i in range(chord_size - 1):
-        chord_interval = interval.Interval(my_chord[i], my_chord[i + 1]).semitones
+        chord_interval = pcs[i+1] - pcs[i]
         interval_list.append(chord_interval)
     interval_label = "<" + "-".join(map(str, interval_list)) + ">"
     return interval_label
@@ -33,19 +31,26 @@ def int_sia(my_chord):
     :param my_chord: chord
     """
     chord_size = len(my_chord.pitches)
-    for p in my_chord.pitches:
-        p.simplifyEnharmonic(inPlace=True, mostCommon=True)
-        p.octave = 4
+    pcs = [p.pitchClass for p in my_chord.pitches]
     interval_list = []
     for i in range(chord_size - 1):
-        chord_interval = interval.Interval(my_chord[i], my_chord[i + 1]).semitones
+        chord_interval = pcs[i+1] - pcs[i]
         interval_list.append(chord_interval)
-    last_interval = interval.Interval(
-        my_chord[-1], my_chord[0].transpose(interval.Interval("P8"))
-    ).semitones
+    last_interval = (pcs[0] + 12) - pcs[-1]
     interval_list.append(last_interval)
     interval_sia = "<" + "-".join(map(str, interval_list)) + ">"
     return interval_sia
+
+def pcs_complement(my_chord):
+    """
+    Takes a music21.chord.Chord and returns its complement
+    as a list of pcs
+    :param my_chord: chord
+    """
+    A = [p.pitchClass for p in my_chord.pitches]  # The chord.
+    U = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]  # The aggregate.
+    C = [pc for pc in U if pc not in A]  # The complement.
+    return C
 
 
 def plt_circle(my_chord, scale_name):
@@ -55,9 +60,6 @@ def plt_circle(my_chord, scale_name):
     :param my_chord: chord
     """
     # Get the chord ready.
-    for p in my_chord.pitches:
-        p.simplifyEnharmonic(inPlace=True, mostCommon=True)
-        p.octave = 0
     pcs = [p.pitchClass for p in my_chord.pitches]
 
     # Draw a unit circle using the parametric equation;
@@ -114,9 +116,6 @@ def plt_circle(my_chord, scale_name):
             ha="center",
             va="center",
         )
-
-    # # Define a pc set and plot some points
-    # pcs = [0, 1, 2, 4, 6, 7, 8, 10]
 
     # iterate through pairs
     for a in range(len(pcs) - 1):

@@ -30,7 +30,7 @@
 |  <48B>  |  3-11B  |  <037>  |  <4-3-5>  |  <001110>  |  major triad  |
 |  <78B>  |  3-3A  |  <014>  |  <1-3-8>  |  <101100>  |  major-minor trichord  |
 
-Forte summary: 3-3A: 3, 3-3B: 3, 3-4A: 3, 3-4B: 3, 3-11A: 3, 3-11B: 3, 3-12: 2.
+Summary: 3-3A: 3, 3-3B: 3, 3-4A: 3, 3-4B: 3, 3-11A: 3, 3-11B: 3, 3-12: 2.
 
 ## Subsets of cardinality 4
 
@@ -52,7 +52,7 @@ Forte summary: 3-3A: 3, 3-3B: 3, 3-4A: 3, 3-4B: 3, 3-11A: 3, 3-11B: 3, 3-12: 2.
 |  <378B>  |  4-19A  |  <0148>  |  <4-1-3-4>  |  <101310>  |  minor-augmented tetrachord  |
 |  <478B>  |  4-17  |  <0347>  |  <3-1-3-5>  |  <102210>  |  major-minor tetramirror  |
 
-Forte summary: 4-7: 3, 4-17: 3, 4-19A: 3, 4-19B: 3, 4-20: 3.
+Summary: 4-7: 3, 4-17: 3, 4-19A: 3, 4-19B: 3, 4-20: 3.
 
 ## Subsets of cardinality 5
 
@@ -65,5 +65,5 @@ Forte summary: 4-7: 3, 4-17: 3, 4-19A: 3, 4-19B: 3, 4-20: 3.
 |  <0478B>  |  5-21B  |  <01458>  |  <4-3-1-3-1>  |  <202420>  |  Lebanese pentachord  |
 |  <3478B>  |  5-21A  |  <01458>  |  <1-3-1-3-4>  |  <202420>  |  major-augmented ninth chord  |
 
-Forte summary: 5-21A: 3, 5-21B: 3.
+Summary: 5-21A: 3, 5-21B: 3.
 
