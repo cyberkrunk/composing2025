@@ -2,9 +2,10 @@ from music21 import *
 from itertools import combinations, permutations
 from collections import Counter
 from natsort import natsorted
+from bisect import insort
 from cjcomp import int_sia, plt_circle, pcs_complement
 
-scale_def = ["Major 7th chord", [0, 4, 7, 11]]
+scale_def = ["Major 7th chord", [0, 1, 3, 4, 6, 7, 9, 10]]
 size = len(scale_def[1])
 
 for k in range(size + 1, 10):
@@ -16,8 +17,10 @@ for k in range(size + 1, 10):
     compl = pcs_complement(chord.Chord(scale_def[1]))
     pcs_add = k - size
     for i in combinations(compl, pcs_add):
-        pcs_new = scale_def[1] + list(i)
-        pcs_new.sort()
+        pcs_new = scale_def[1].copy()
+        [insort(pcs_new, add) for add in i]
+        # pcs_new = scale_def[1] + list(i)
+        # pcs_new.sort()
         superset = chord.Chord(pcs_new)
         print(
             "| ",

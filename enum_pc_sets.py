@@ -6,6 +6,7 @@ from music21 import *
 from itertools import combinations, permutations
 from collections import Counter
 from natsort import natsorted
+from bisect import insort
 from cjcomp import int_sia, plt_circle, pcs_complement
 import sys
 
@@ -17,36 +18,38 @@ acoustic = ["acoustic", [0, 1, 3, 4, 6, 8, 10]]
 diatonic = ["diatonic", [0, 1, 3, 5, 6, 8, 10]]
 octatonic = ["octatonic", [0, 1, 3, 4, 6, 7, 9, 10]]
 
-scale_def = wholetone
-size = len(scale_def[1])
+scale_def = acoustic
+scale_name = scale_def[0]
+scale_pcs = scale_def[1]
+size = len(scale_pcs)
 
 stdout_fileno = sys.stdout
-sys.stdout = open("./output/" + str(scale_def[0]) + "-pc-subsets.md", "w")
+sys.stdout = open("./output/" + str(scale_name) + "-pc-subsets.md", "w")
 
-print(f"## Subsets of {scale_def[0]}, {scale_def[1]}")
+print(f"## Subsets of {scale_name}, {scale_pcs}")
 print()
 print("| pcs | Forte name | prime | sia | ic Vector | Common |")
 print("| --- | --- | --- | --- | --- | --- |")
 print(
     "| ",
-    chord.Chord(scale_def[1]).orderedPitchClassesString,
+    chord.Chord(scale_pcs).orderedPitchClassesString,
     " | ",
-    chord.Chord(scale_def[1]).forteClass,
+    chord.Chord(scale_pcs).forteClass,
     " | ",
-    chord.Chord(scale_def[1]).primeFormString,
+    chord.Chord(scale_pcs).primeFormString,
     " | ",
-    int_sia(chord.Chord(scale_def[1])),
+    int_sia(chord.Chord(scale_pcs)),
     " | ",
-    chord.Chord(scale_def[1]).intervalVectorString,
+    chord.Chord(scale_pcs).intervalVectorString,
     " | ",
-    chord.Chord(scale_def[1]).commonName,
+    chord.Chord(scale_pcs).commonName,
     " |",
 )
 print()
 
-plt_circle(chord.Chord(scale_def[1]), scale_def[0])
+plt_circle(chord.Chord(scale_pcs), scale_name)
 
-print(f"![](./{scale_def[0]}.png)")
+print(f"![](./{scale_name}.png)")
 print()
 
 # Enumerate all subsets.
@@ -56,7 +59,7 @@ for k in range(3, size):
     print()
     print("| pcs | Forte name | prime | sia | ic Vector | Common |")
     print("| --- | --- | --- | --- | --- | --- |")
-    for i in combinations(scale_def[1], k):
+    for i in combinations(scale_pcs, k):
         subset = chord.Chord(i)
         print(
             "| ",
@@ -88,11 +91,11 @@ for k in range(size + 1, 10):
     print()
     print("| pcs | Forte name | prime | sia | ic Vector | Common |")
     print("| --- | --- | --- | --- | --- | --- |")
-    compl = pcs_complement(chord.Chord(scale_def[1]))
+    compl = pcs_complement(chord.Chord(scale_pcs))
     pcs_add = k - size
     for i in combinations(compl, pcs_add):
-        pcs_new = scale_def[1] + list(i)
-        pcs_new.sort()
+        pcs_new = scale_pcs.copy()
+        [insort(pcs_new, add) for add in i]  # Adds new pitches sorted in place
         superset = chord.Chord(pcs_new)
         print(
             "| ",
@@ -110,6 +113,7 @@ for k in range(size + 1, 10):
             " |",
         )
         cnt[str(superset.forteClass)] += 1
+        # pcs_new = []
     items = cnt.items()
     summary = dict(natsorted(items))
     pretty = ", ".join(f"{k}: {v}" for k, v in summary.items())

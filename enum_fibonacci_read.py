@@ -15,5 +15,5 @@ with open("fibonacci.json", "r") as f:
 fibonacci_dict = {int(k): v for k, v in fibonacci_dict.items()}
 
 print(fibonacci_dict)
-
-print(fibonacci_dict[12])
+print([v for k, v in fibonacci_dict.items()])
+print(fibonacci_dict[12]+fibonacci_dict[10])
