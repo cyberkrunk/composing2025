@@ -12,10 +12,11 @@ from cjcomp import int_label
 
 # Define the intervals to be used
 interval_pool = [3, 4, 10, 11]
-set_size = 3
+set_size = 3  # chord size will be this + 1
 
 # Enumerate all permutations with repetition and store them in a list
 perms = list(itertools.product(interval_pool, repeat=set_size))
+print(f"perms: {perms}")
 num_chords = str(len(perms))
 
 # Set up score and parts
@@ -45,7 +46,7 @@ for perm in perms:
         current_pitch = interval.Interval(i).transposePitch(current_pitch)
         chord_pitches.append(current_pitch)
     my_chord = chord.Chord(chord_pitches)
-    l = int_label(my_chord)
+    l = int_label(my_chord)  # NOTE: this is the wrong label
     my_chord.quarterLength = 2
     my_chord.addLyric(l)
     my_chord.addLyric(str(my_chord.forteClassTn))

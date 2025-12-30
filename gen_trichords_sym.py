@@ -25,8 +25,8 @@ while start_chord[2] < 12:
         chord_stream.append(copy.deepcopy(current_chord))
     start_chord[2] += 1
 
-for my_chord in chord_stream:
+for i, my_chord in enumerate(chord_stream, start=1):
     m21_chord = chord.Chord(my_chord)
-    print(f"{my_chord} {m21_chord.forteClassTn}")
+    print(f"{i}: {my_chord} {m21_chord.forteClassTn}")
 
 print(f"There are {len(chord_stream)} chords.")

@@ -3,7 +3,7 @@
 # 2025-11-25
 # ---------------------------------------------------------------------
 from music21 import scale, chord, meter, key
-from cjcomp import int_label, setup_score
+from cjcomp import chord_2_pchord, pchord_int_label, int_label, setup_score
 
 # Define the scale
 s = scale.MajorScale("G3")
@@ -18,7 +18,8 @@ scale_size = len(s.getPitches("C4", "B4"))
 scale_pitches = s.getPitches("G3", "C7")
 
 # The chord pattern
-generic_chord = [0, 3, 6, 9, 12, 15]
+# 0=first note in scale, 1=second note, 2=3rd note etc.
+generic_chord = [0, 3, 6, 9, 12, 15]  # NOTE: these are *not* intervals
 
 # Size of chord
 chord_size = len(generic_chord)
@@ -44,7 +45,7 @@ part.insert(key.Key("G", "major"))
 for c in harmonized_chords:
     c.quarterLength = 4
     part.append(c)
-    c.addLyric(int_label(c))
+    c.addLyric(pchord_int_label(chord_2_pchord(c)))
     c.addLyric(str(c.forteClassTn))
 ts = meter.TimeSignature(str(scale_size) + "/1")
 ts.style.hideObjectOnPrint = True

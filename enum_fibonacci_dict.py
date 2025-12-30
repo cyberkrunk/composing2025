@@ -14,5 +14,5 @@ fibonacci_dict = {0: 0, 1: 1}
 for i in range(2, 41):
     fibonacci_dict[i] = fibonacci_dict[i - 1] + fibonacci_dict[i - 2]
 
-with open("fibonacci.json", "w") as f:
+with open("output/fibonacci.json", "w") as f:
     json.dump(fibonacci_dict, f)

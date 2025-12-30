@@ -6,14 +6,15 @@
 
 import json
 
-with open("fibonacci.json", "r") as f:
-    fibonacci_dict = json.load(f)
+with open("output/fibonacci.json", "r") as file:
+    fibonacci_dict = json.load(file)
 
-# Need to convert the keys back into integers (json stores them as
-# strings). This method uses python dictionary comprehension.
+# Convert the keys back into integers (json stores them as
+# strings). This method uses Python dictionary comprehension.
 
-fibonacci_dict = {int(k): v for k, v in fibonacci_dict.items()}
+fibonacci_dict = {int(key): value for key, value in fibonacci_dict.items()}
 
-print(fibonacci_dict)
-print([v for k, v in fibonacci_dict.items()])
-print(fibonacci_dict[12]+fibonacci_dict[10])
+print(f"fibonacci_dict: {fibonacci_dict}\n")
+print(f"Just the values as a list: {[value for key, value in fibonacci_dict.items()]}\n")
+
+print(f"Not sure what this is: {fibonacci_dict[12]+fibonacci_dict[10]}")
