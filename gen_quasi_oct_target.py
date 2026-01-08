@@ -18,7 +18,7 @@ target = 88
 phrase = 1
 shorts = 1
 while start < target:
-    print(str(phrase) + "----------")
+    print(f"{phrase}----------")
     p = start
     shorts = 1
     n = note.Note(p)

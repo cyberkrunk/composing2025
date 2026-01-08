@@ -49,7 +49,7 @@ def int_label(my_chord):
     for i in range(chord_size - 1):
         chord_interval = pcs[i + 1] - pcs[i]
         interval_list.append(chord_interval)
-    interval_label = "<" + "-".join(map(str, interval_list)) + ">"
+    interval_label = "<" + "-".join([str(interval) for interval in interval_list]) + ">"
     return interval_label
 
 
@@ -67,7 +67,7 @@ def int_sia(my_chord):
         interval_list.append(chord_interval)
     last_interval = (pcs[0] + 12) - pcs[-1]
     interval_list.append(last_interval)
-    interval_sia = "<" + "-".join(map(str, interval_list)) + ">"
+    interval_sia = "<" + "-".join([str(interval) for interval in interval_list]) + ">"
     return interval_sia
 
 
@@ -85,6 +85,20 @@ def pchord_int_label(my_pchord: list[int]) -> str:
     label = "<" + "-".join(map(str, interval_list)) + ">"
     return label
 
+
+def pchord_int_label_latex(my_pchord: list[int]) -> str:
+    """
+    Generates an interval list label for a pchord which is
+    a chord in p-space, ordered from low to high
+
+    :param my_pchord: Description
+    """
+    interval_list = []
+    for i in range(len(my_pchord) - 1):
+        interval = my_pchord[i + 1] - my_pchord[i]
+        interval_list.append(interval)
+    label = "\\langle" + "\\!-\\!".join(map(str, interval_list)) + "\\rangle"
+    return label
 
 # ---------------------------------------------------------------------
 # Operators
@@ -124,9 +138,7 @@ def pseg_invert(my_pseg: list[int]) -> list[int]:
     """
     # create an interval list
     pseg_size = len(my_pseg)
-    interval_list = [
-        0,
-    ]
+    interval_list = [0, ]
     for i in range(pseg_size - 1):
         pseg_interval = my_pseg[i + 1] - my_pseg[i]
         interval_list.append(pseg_interval)
@@ -135,9 +147,7 @@ def pseg_invert(my_pseg: list[int]) -> list[int]:
     interval_list_inverted = [interval * -1 for interval in interval_list]
 
     # create the inverted pseg
-    pseg_inverted = [
-        my_pseg[0],
-    ]  # the starting pitch
+    pseg_inverted = [my_pseg[0], ]  # the starting pitch
     for i in range(1, pseg_size):
         p = pseg_inverted[i - 1] + interval_list_inverted[i]
         pseg_inverted.append(p)
@@ -245,7 +255,7 @@ def plt_circle(my_chord, scale_name):
 # ---------------------------------------------------------------------
 
 
-def setup_score(title, instrument):
+def setup_score(title: str, instrument: str):
     """
     Returns a basic music21 score object
 

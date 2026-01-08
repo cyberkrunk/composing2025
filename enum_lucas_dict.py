@@ -14,5 +14,5 @@ lucas_dict = {0: 2, 1: 1}
 for i in range(2, 39):
     lucas_dict[i] = lucas_dict[i - 1] + lucas_dict[i - 2]
 
-with open("lucas.json", "w") as f:
+with open("output/lucas.json", "w") as f:
     json.dump(lucas_dict, f)
