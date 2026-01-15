@@ -1,0 +1,17 @@
+[project]
+name = "composing2025"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "music21>=9.9.1",
+    "natsort>=8.4.0",
+    "scipy>=1.17.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+]
